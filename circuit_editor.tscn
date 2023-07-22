@@ -5,7 +5,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52rpg"]
 resource_local_to_scene = true
-size = Vector2(0, 0)
+size = Vector2(640, 320)
 
 [node name="CircuitEditor" type="Node2D"]
 script = ExtResource("1_xekyc")
@@ -22,9 +22,10 @@ filters = PackedStringArray("*.asc ; LTspice Schematic File")
 
 [node name="Resistor" parent="." instance=ExtResource("3_truey")]
 position = Vector2(659, 357)
+rotation = 1.5708
 
 [node name="Resistance" parent="Resistor" index="0"]
-number = 3.0
+number = 4.0
 
 [node name="BoundingBox" parent="Resistor" index="1"]
 shape = SubResource("RectangleShape2D_52rpg")

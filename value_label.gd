@@ -15,9 +15,7 @@ extends Label
 
 ## Called when the node enters the scene tree for the first time.
 func _ready():
-		if value:
-			self.text = str(value)
-			print(value)
+		self.text = str(value)
 #	if self.get_child_count():
 #		value = self.get_child(0)
 #		print(value)
@@ -39,4 +37,3 @@ func _process(_delta):
 
 func _on_value_changed():
 	self.text = str(value)
-	print(value)

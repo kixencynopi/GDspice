@@ -19,6 +19,7 @@ prefix = 3
 
 [node name="BoundingBox" parent="Component" index="0"]
 shape = SubResource("RectangleShape2D_8fnti")
+size_in_grid = Vector2i(0, 0)
 
 [node name="Symbol" parent="Component" index="1"]
 texture = ExtResource("3_h83se")

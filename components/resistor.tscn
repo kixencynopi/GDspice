@@ -1,22 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqbnqarjeri1v"]
+[gd_scene load_steps=6 format=3 uid="uid://dqbnqarjeri1v"]
 
 [ext_resource type="PackedScene" uid="uid://dahe2euiuqnao" path="res://components/component.tscn" id="1_13vlg"]
 [ext_resource type="Script" path="res://si.gd" id="3_4b0qf"]
 [ext_resource type="Texture2D" uid="uid://baown2j0iwyb8" path="res://components/symbols/resistor.png" id="3_h83se"]
+[ext_resource type="PackedScene" uid="uid://e27kop0y6fwx" path="res://terminal.tscn" id="4_m26en"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qpq1m"]
 resource_local_to_scene = true
-size = Vector2(0, 0)
+size = Vector2(640, 320)
 
 [node name="Resistor" instance=ExtResource("1_13vlg")]
 
 [node name="Resistance" type="Node" parent="." index="0"]
 script = ExtResource("3_4b0qf")
-number = 2.0
+number = 1.0
 prefix = 3
+positive_only = true
 
 [node name="BoundingBox" parent="." index="1"]
 shape = SubResource("RectangleShape2D_qpq1m")
+size_in_grid = Vector2i(4, 2)
 
 [node name="Symbol" parent="." index="2"]
 texture = ExtResource("3_h83se")
@@ -24,7 +27,13 @@ texture = ExtResource("3_h83se")
 [node name="ValueLabel" parent="." index="3" node_paths=PackedStringArray("value")]
 offset_top = -171.0
 offset_bottom = -54.0
-text = "ABC"
+text = "R"
 value = NodePath("../Resistance")
+
+[node name="NC1" parent="Terminals" index="0"]
+position = Vector2(-320, 2.08165e-12)
+
+[node name="NC2" parent="Terminals" index="1" instance=ExtResource("4_m26en")]
+position = Vector2(320, 2.08165e-12)
 
 [connection signal="value_changed" from="Resistance" to="ValueLabel" method="_on_value_changed"]

@@ -1,4 +1,4 @@
-class_name SI
+#class_name SI
 extends Value
 
 
@@ -39,19 +39,16 @@ const PREFIX_REPR_DICT := {
 	PREFIX.FEMTO: "f"
 }
 ## Just the numerical part of the component value (without the SI unit/prefix)
-@export var number : float:
-	set = _set_number
+@export var number : float
 ## Just the SI unit prefix part of the component value (without the unit)
-@export var prefix : PREFIX:
-	set = _set_prefix
+@export var prefix : PREFIX
 ## SI unit of the component
 @export var unit : UNIT
 ## Whether to only limit to poisitive values
 @export var positive_only : bool
 
-## Read-only numerical value in SI unit
-var value : float:
-	set = _set_value
+## Numerical value in SI unit
+var value : float
 
 func _init(
 	_number := NAN, 
@@ -59,10 +56,11 @@ func _init(
 	_unit := UNIT.OHM,
 	_positive_only := false
 	):
-	self.positive_only = _positive_only
-	self.unit = _unit
 	self.number = _number
 	self.prefix = _prefix
+	self.unit = _unit
+	self.positive_only = _positive_only
+	update_value()
 
 
 func _to_string():
@@ -82,8 +80,12 @@ func _to_string():
 	)
 	
 
-func _set_value(_value : float):
-	value = _value
+func update_value():
+	if self.positive_only and self.number <= 0:
+		# set to lowest possible positive number
+		self.number = 1
+		self.prefix = PREFIX.values().min()
+	self.value = self.number * 10.0 ** self.prefix
 	self.value_changed.emit()
 	print_rich(
 		"new si unit value: " + 
@@ -92,29 +94,23 @@ func _set_value(_value : float):
 		"[/color] = " +
 		"%.15f" % self.value
 	)
-
-# also updates value
-func _set_prefix(_prefix : PREFIX):
-	prefix = _prefix
-	self.value = self.number * 10.0 ** self.prefix
 	
-func _set_number(_number : float):
-	var _prefix = self.prefix
-	if self.positive_only and _number <= 0:
-		# set to lowest possible positive quantity (e.g. 1 femto)
-		_number = 1
-		_prefix = PREFIX.values().min()
+func update_prefix(_prefix:PREFIX):
+	self.prefix = _prefix
+	update_value()
+	
+func update_number(_number:float):
+	self.number = _number
 #	print_rich("from: [color=pink]", self.number, PREFIX_REPR_DICT[self.prefix], "[/color]")
-	while absf(_number) >= 1e3-1e-6 and _prefix < PREFIX.values().max():
-		_number /= 1e3
-		_prefix += 3
+	while absf(self.number) >= 1e3-1e-6 and self.prefix < PREFIX.values().max():
+		self.number /= 1e3
+		self.prefix += 3
 #		print("maxi loop: ", self.number, "e", self.prefix)
 	# loop to find smaller prefixes	
-	while absf(_number) < 1-1e-6 and _prefix > PREFIX.values().min():
-		_number *= 1e3
-		_prefix -= 3
+	while absf(self.number) < 1-1e-6 and self.prefix > PREFIX.values().min():
+		self.number *= 1e3
+		self.prefix -= 3
 #		print("mini loop: ", self.number, "e", self.prefix)
 	# finally update value in SI unit
 #	print_rich("to: [color=cyan]", self.number, PREFIX_REPR_DICT[self.prefix], "[/color]")
-	number = _number
-	self.prefix = _prefix
+	update_value()

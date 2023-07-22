@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://e27kop0y6fwx"]
+
+[ext_resource type="Texture2D" uid="uid://b106r2k6lcuvs" path="res://components/symbols/node_filled.png" id="1_30tsj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8egir"]
+radius = 32.8938
+
+[node name="Terminal" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8egir")
+debug_color = Color(0.701961, 0, 0, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_30tsj")
