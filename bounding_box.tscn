@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc6vpsglkw76q"]
+
+[ext_resource type="Script" path="res://bounding_box.gd" id="1_jb10e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70sjb"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
+
+[node name="BoundingBox" type="CollisionShape2D"]
+shape = SubResource("RectangleShape2D_70sjb")
+script = ExtResource("1_jb10e")
+size_in_grid = Vector2i(0, 0)

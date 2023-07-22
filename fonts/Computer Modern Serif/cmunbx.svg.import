@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baown2j0iwyb8"
-path="res://.godot/imported/resistor.png-a17079e49071a50411a63778b79327d9.ctex"
+uid="uid://b6ucyuvd0dnwq"
+path="res://.godot/imported/cmunbx.svg-2405d0cf8279057ca887baf0c6797024.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://components/symbols_darkmode/resistor.png"
-dest_files=["res://.godot/imported/resistor.png-a17079e49071a50411a63778b79327d9.ctex"]
+source_file="res://fonts/Computer Modern Serif/cmunbx.svg"
+dest_files=["res://.godot/imported/cmunbx.svg-2405d0cf8279057ca887baf0c6797024.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

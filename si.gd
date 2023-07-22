@@ -1,5 +1,6 @@
-class_name SI 
-extends Node
+class_name SI
+extends Value
+
 
 enum UNIT {
 	OHM,
@@ -28,7 +29,7 @@ const UNIT_REPR_DICT := {
 const PREFIX_REPR_DICT := {
 	PREFIX.TERRA: "T",
 	PREFIX.GIGA: "G",
-	PREFIX.MEGA: "Meg",
+	PREFIX.MEGA: "M",
 	PREFIX.KILO: "k",
 	PREFIX.NONE: "",
 	PREFIX.MILLI: "m",
@@ -46,19 +47,31 @@ const PREFIX_REPR_DICT := {
 ## Numerical value in SI unit
 var value := NAN
 
-func _init(_number:float, _prefix:PREFIX, _unit:UNIT):
+func _init(_number := NAN, _prefix := PREFIX.NONE, _unit := UNIT.OHM):
 	self.number = _number
 	self.prefix = _prefix
 	self.unit = _unit
+	update_value()
+
 
 func _to_string():
-	return "%.2f %s%s" % [
-		self.number, 
-		PREFIX_REPR_DICT[self.prefix], 
+	# convert upto 2 decimal places
+	var number_str := "%.2f" % self.number
+	# remove unnecessary 0's.
+	if number_str[-1] == "0":
+		number_str = number_str.left(-1)
+	if number_str[-1] == "0":
+		number_str = number_str.left(-2)
+	# add spacing and unit
+	return (
+		number_str + 
+		" " + # half-width space
+		PREFIX_REPR_DICT[self.prefix] +
 		UNIT_REPR_DICT[self.unit]
-	]
+	)
 	
 func update_value():
+	self.value_changed.emit()
 	self.value = self.number * 10.0 ** self.prefix
 	print_rich(
 		"new si unit value: ", 
@@ -74,21 +87,16 @@ func update_prefix(_prefix:PREFIX):
 	
 func update_number(_number:float):
 	self.number = _number
-	print_rich("from: [color=pink]", self.number, PREFIX_REPR_DICT[self.prefix], "[/color]")
+#	print_rich("from: [color=pink]", self.number, PREFIX_REPR_DICT[self.prefix], "[/color]")
 	while absf(self.number) >= 1e3-1e-6 and self.prefix < PREFIX.values().max():
 		self.number /= 1e3
 		self.prefix += 3
-		print("maxi loop: ", self.number, "e", self.prefix)
+#		print("maxi loop: ", self.number, "e", self.prefix)
 	# loop to find smaller prefixes	
 	while absf(self.number) < 1-1e-6 and self.prefix > PREFIX.values().min():
 		self.number *= 1e3
 		self.prefix -= 3
-		print("mini loop: ", self.number, "e", self.prefix)
+#		print("mini loop: ", self.number, "e", self.prefix)
 	# finally update value in SI unit
-	print_rich("to: [color=cyan]", self.number, PREFIX_REPR_DICT[self.prefix], "[/color]")
+#	print_rich("to: [color=cyan]", self.number, PREFIX_REPR_DICT[self.prefix], "[/color]")
 	update_value()
-
-
-
-	
-	

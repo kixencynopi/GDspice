@@ -1,20 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://rpagvoghtxt5"]
+[gd_scene load_steps=5 format=3 uid="uid://dqbnqarjeri1v"]
 
 [ext_resource type="PackedScene" uid="uid://dahe2euiuqnao" path="res://components/component.tscn" id="1_13vlg"]
-[ext_resource type="Texture2D" uid="uid://baown2j0iwyb8" path="res://components/symbols_darkmode/resistor.png" id="3_etrcu"]
-[ext_resource type="Script" path="res://si.gd" id="3_tfk6i"]
+[ext_resource type="Script" path="res://si.gd" id="3_4b0qf"]
+[ext_resource type="Texture2D" uid="uid://baown2j0iwyb8" path="res://components/symbols/resistor.png" id="3_h83se"]
 
-[node name="Resistor" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qpq1m"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
 
-[node name="Component" parent="." instance=ExtResource("1_13vlg")]
-size = Vector2i(2, 1)
-numerical_value = nan
-si_unit_prefix = 0
+[node name="Resistor" instance=ExtResource("1_13vlg")]
 
-[node name="SI" type="Node" parent="."]
-script = ExtResource("3_tfk6i")
-number = nan
+[node name="Resistance" type="Node" parent="." index="0"]
+script = ExtResource("3_4b0qf")
+number = 2.0
+prefix = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_etrcu")
+[node name="BoundingBox" parent="." index="1"]
+shape = SubResource("RectangleShape2D_qpq1m")
+
+[node name="Symbol" parent="." index="2"]
+texture = ExtResource("3_h83se")
+
+[node name="ValueLabel" parent="." index="3" node_paths=PackedStringArray("value")]
+offset_top = -171.0
+offset_bottom = -54.0
+text = "ABC"
+value = NodePath("../Resistance")
+
+[connection signal="value_changed" from="Resistance" to="ValueLabel" method="_on_value_changed"]

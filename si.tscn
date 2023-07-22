@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://df27l6mrqft1n"]
+[gd_scene load_steps=2 format=3 uid="uid://dgbra7wv5x0et"]
 
-[ext_resource type="Script" path="res://si.gd" id="1_d16ev"]
+[ext_resource type="Script" path="res://si.gd" id="1_prjqy"]
 
 [node name="SI" type="Node"]
-script = ExtResource("1_d16ev")
+script = ExtResource("1_prjqy")
 number = nan

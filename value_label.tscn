@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cioo61s2b61tp"]
+
+[ext_resource type="FontFile" uid="uid://dw4aja3b6loib" path="res://fonts/Computer Modern Serif/cmunrm.ttf" id="1_srnbt"]
+[ext_resource type="Script" path="res://value_label.gd" id="2_lwhm8"]
+
+[node name="ValueLabel" type="Label"]
+offset_left = -320.0
+offset_top = -89.0
+offset_right = 320.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("1_srnbt")
+theme_override_font_sizes/font_size = 86
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_lwhm8")

@@ -1,8 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://do3rbboax0bgr"]
 
 [ext_resource type="Script" path="res://circuit_editor.gd" id="1_xekyc"]
-[ext_resource type="PackedScene" uid="uid://dahe2euiuqnao" path="res://components/component.tscn" id="2_5d2n5"]
-[ext_resource type="PackedScene" uid="uid://rpagvoghtxt5" path="res://components/resistor.tscn" id="3_truey"]
+[ext_resource type="PackedScene" uid="uid://dqbnqarjeri1v" path="res://components/resistor.tscn" id="3_truey"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52rpg"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
 
 [node name="CircuitEditor" type="Node2D"]
 script = ExtResource("1_xekyc")
@@ -17,17 +20,15 @@ access = 2
 root_subfolder = "/Users/shawon/Documents/LTspice"
 filters = PackedStringArray("*.asc ; LTspice Schematic File")
 
-[node name="Component" parent="." instance=ExtResource("2_5d2n5")]
-position = Vector2(118, 112)
-size = Vector2i(2, 3)
-numerical_value = nan
-si_unit_prefix = 0
-
-[node name="Component2" parent="." instance=ExtResource("2_5d2n5")]
-position = Vector2(263, 181)
-numerical_value = nan
-si_unit_prefix = 0
-
 [node name="Resistor" parent="." instance=ExtResource("3_truey")]
+position = Vector2(659, 357)
+
+[node name="Resistance" parent="Resistor" index="0"]
+number = 3.0
+
+[node name="BoundingBox" parent="Resistor" index="1"]
+shape = SubResource("RectangleShape2D_52rpg")
 
 [connection signal="file_selected" from="AscFileSelectionDialog" to="." method="_on_asc_file_selected"]
+
+[editable path="Resistor"]

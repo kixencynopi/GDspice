@@ -1,20 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dahe2euiuqnao"]
+[gd_scene load_steps=5 format=3 uid="uid://dahe2euiuqnao"]
 
 [ext_resource type="Script" path="res://components/component.gd" id="1_gl6nw"]
+[ext_resource type="PackedScene" uid="uid://cc6vpsglkw76q" path="res://bounding_box.tscn" id="2_4bnct"]
+[ext_resource type="PackedScene" uid="uid://cioo61s2b61tp" path="res://value_label.tscn" id="2_jgffl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_70sjb"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5b8s"]
 resource_local_to_scene = true
-size = Vector2(2.08165e-12, 2.08165e-12)
+size = Vector2(0, 0)
 
 [node name="Component" type="Area2D"]
 script = ExtResource("1_gl6nw")
-numerical_value = -4.52514e-12
-si_unit_prefix = -6
 
-[node name="BoundingBox" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_70sjb")
+[node name="BoundingBox" parent="." instance=ExtResource("2_4bnct")]
+shape = SubResource("RectangleShape2D_x5b8s")
 
-[node name="Value" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "AAA"
+[node name="Symbol" type="Sprite2D" parent="."]
+
+[node name="ValueLabel" parent="." instance=ExtResource("2_jgffl")]

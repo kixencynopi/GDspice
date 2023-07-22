@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bciunw2tli402"
-path="res://.godot/imported/resistor.svg-fa578e5c33373bc7ae590d608f86bec0.ctex"
+uid="uid://d27d4b5d632pw"
+path="res://.godot/imported/cmunti.svg-1a4f708ed965e42b113ddc8d7d75162d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://components/symbols_lightmode/resistor.svg"
-dest_files=["res://.godot/imported/resistor.svg-fa578e5c33373bc7ae590d608f86bec0.ctex"]
+source_file="res://fonts/Computer Modern Serif/cmunti.svg"
+dest_files=["res://.godot/imported/cmunti.svg-1a4f708ed965e42b113ddc8d7d75162d.ctex"]
 
 [params]
 
